@@ -1,0 +1,5 @@
+update changelog
+add more complete test which uses the scalars in schema (integration ?)
+
+maybe minify
+test coverage reporting - https://coveralls.io/ integration
