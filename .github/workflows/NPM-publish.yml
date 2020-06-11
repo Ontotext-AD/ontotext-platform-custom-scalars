@@ -1,0 +1,48 @@
+# Trigger publish job on pushing release
+# The packages are published in the NPM registry.
+# There is a second job that could be enabled to publish into github NPM registry
+name: Release NPM package
+
+on:
+  release:
+    types:
+      - published
+
+
+jobs:
+  npm-registry-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Publish to NPM registry
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+# TODO which registry are we going to use
+#  npm-github-registry-publish:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v1
+#        with:
+#          node-version: '12.x'
+#          registry-url: 'https://npm.pkg.github.com'
+#          scope: '@Ontotext-AD'
+
+#      - name: Install Dependencies
+#        run: npm install
+
+#      - name: Publish to NPM registry
+#        run: npm publish
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
