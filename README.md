@@ -1,2 +1,2 @@
 # platform-custom-scalars
-Library of GraphQL customized scalars for Ontotext Platform  
+Library of customized GraphQL scalars for Ontotext Platform

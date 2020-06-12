@@ -29,6 +29,6 @@ jobs:
       run: npm test # defined in package.json
     
     - name: Run lint
-      run: npm lint # defined in package.json
+      run: npm run lint # defined in package.json
 
 

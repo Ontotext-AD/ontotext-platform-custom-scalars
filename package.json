@@ -1,0 +1,62 @@
+{
+  "name": "platform-custom-scalars",
+  "version": "0.1.0",
+  "description": "A library of customized GraphQL scalars for Ontotext Platform",
+  "homepage": "https://github.com/Ontotext-AD/platform-custom-scalars#readme",
+  "license": "Apache-2.0",
+  "main": "index",
+  "author": {
+    "name": "'Sirma AI' JSC, trading as Ontotext",
+    "url": "https://www.ontotext.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ontotext-AD/platform-custom-scalars.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ontotext-AD/platform-custom-scalars/issues"
+  },
+  "keywords": [
+    "platform",
+    "scalars",
+    "graphql",
+    "graphql-js"
+  ],
+  "engines": {
+    "node": ">= 14.2"
+  },
+  "engines_on_npm": {
+    "node": ">= 10.x"
+  },
+  "dependencies": {
+    "graphql": "^15.0.0",
+    "bignumber.js": "^9.0.0",
+    "@jest/globals": "^26.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
+    "eslint": "^7.2.0",
+    "jest": "^26.0.1"
+  },
+  "scripts": {
+    "test": "jest --coverage --no-cache",
+    "lint": "eslint 'src/**' 'test/**'"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "@babel/plugin-transform-modules-commonjs"
+        ]
+      }
+    }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/coverage/**"
+    ]
+  }
+}
