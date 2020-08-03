@@ -25,16 +25,16 @@ To use the scalars after installing the package, you will need to import them in
 resolvers for them.
 ```javascript
 import { ApolloServer, gql } from 'apollo-server';
-import GraphQLDouble from 'platform-custom-scalars';
+import GraphQLDecimal from 'platform-custom-scalars';
 
 // For ES5 projects
-// const { GraphQLDouble } = require("platform-custom-scalars");
+// const { GraphQLDecimal } = require("platform-custom-scalars");
 
 const schema = gql`
-  scalar Double
+  scalar Decimal
 
   type CustomType {
-    fieldName: Double
+    fieldName: Decimal
   }
 
   type Query {
@@ -43,7 +43,7 @@ const schema = gql`
 `;
 
 const resolversFunc = {
-  Double: GraphQLDouble
+  Decimal: GraphQLDecimal
 };
 
 new ApolloServer({ typeDefs: schema, resolvers: resolversFunc }).listen().then(({ url }) => {

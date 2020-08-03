@@ -1,5 +1,4 @@
 import GraphQLDecimal from "./scalars/GraphQLDecimal";
-import GraphQLDouble from "./scalars/GraphQLDouble";
 import GraphQLInteger from "./scalars/GraphQLInteger";
 import GraphQLNegativeFloat from "./scalars/GraphQLNegativeFloat";
 import GraphQLNegativeInteger from "./scalars/GraphQLNegativeInteger";
@@ -23,7 +22,6 @@ import GraphQLYearMonth from "./scalars/time/GraphQLYearMonth";
 
 export {
     GraphQLDecimal,
-    GraphQLDouble,
     GraphQLInteger,
     GraphQLNegativeFloat,
     GraphQLNegativeInteger,
