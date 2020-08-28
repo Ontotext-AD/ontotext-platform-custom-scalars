@@ -11,12 +11,12 @@ describe(`GraphQLNegativeFloat`, () => {
             test(`int`, () => expect(GraphQLNegativeFloat.parseLiteral({
                 kind: Kind.INT,
                 value: -123
-            })).toEqual(-123));
+            })).toEqual('-123'));
 
             test(`float`, () => expect(GraphQLNegativeFloat.parseLiteral({
                 kind: Kind.FLOAT,
                 value: -123.123
-            })).toEqual(-123.123));
+            })).toEqual('-123.123'));
         });
 
         describe(`invalid`, () => {

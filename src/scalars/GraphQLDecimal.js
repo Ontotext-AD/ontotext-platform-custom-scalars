@@ -1,11 +1,9 @@
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 import {isNumber, throwConversionError} from "./Utilities";
-import {BigNumber} from "bignumber.js";
 
 function convert(value) {
     if (isNumber(value)) {
-        let bigNumber = new BigNumber(value);
-        return bigNumber.toPrecision(bigNumber.sd(true), BigNumber.ROUND_HALF_UP);
+        return value + '';
     }
 
     throw new GraphQLError(`Expected 'Decimal' value, but got ${value}`);
@@ -29,11 +27,6 @@ export default new GraphQLScalarType({
             throwConversionError(type, this.name);
         }
 
-        let value = node.value;
-        if (!isNumber(value)) {
-            throw new GraphQLError(`Expected '${this.name}' value, but got '${value}'`);
-        }
-
-        return new BigNumber(value);
+        return convert(node.value);
     }
 });

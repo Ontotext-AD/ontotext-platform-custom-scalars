@@ -1,23 +1,32 @@
 import {GraphQLError, GraphQLFloat, GraphQLScalarType} from "graphql";
 
+const NON_NEGATIVE_FLOAT = 'NonNegativeFloat';
+
+function convert(value) {
+    if (value < 0) {
+        throw new GraphQLError(`The value of '${NON_NEGATIVE_FLOAT}' should be positive or zero.`);
+    }
+
+    return value + '';
+}
+
 /**
  * Defines custom GraphQLScalarType for non negative float values.
  */
 export default new GraphQLScalarType({
-    name: `NonNegativeFloat`,
+    name: NON_NEGATIVE_FLOAT,
 
     description: `An Float scalar that must be greater than or equal to zero`,
 
-    serialize: GraphQLFloat.serialize,
+    serialize(value) {
+        return convert(GraphQLFloat.serialize(value));
+    },
 
-    parseValue: GraphQLFloat.parseValue,
+    parseValue(value) {
+        return convert(GraphQLFloat.parseValue(value));
+    },
 
     parseLiteral(node) {
-        let value = GraphQLFloat.parseLiteral(node);
-        if (value < 0) {
-            throw new GraphQLError(`The value of '${this.name}' should be positive or zero.`);
-        }
-
-        return value;
+        return convert(GraphQLFloat.parseLiteral(node));
     }
 });

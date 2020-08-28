@@ -1,6 +1,5 @@
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
-import {BigNumber} from "bignumber.js";
-import {parseAsBigNumber, throwConversionError} from "./Utilities";
+import {parseAsBigNumber, throwConversionError, isInteger} from "./Utilities";
 
 /**
  * Defines custom GraphQLScalarType for Integer values.
@@ -24,9 +23,9 @@ export default new GraphQLScalarType({
             throwConversionError(kind, this.name);
         }
 
-        let value = new BigNumber(node.value);
-        if (value.isInteger()) {
-            return value;
+        let value = node.value;
+        if (isInteger(value)) {
+            return value + '';
         }
 
         throw new GraphQLError(`Expected '${this.name}' value, but got '${value}'`);

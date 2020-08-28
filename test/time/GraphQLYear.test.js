@@ -8,11 +8,11 @@ describe(`GraphQLYear`, () => {
 
         describe(`valid`, () => {
 
-            test(`date object`, () => expect(GraphQLYear.serialize(new Date('Wed Jun 10 2020 09:42:45 GMT+0300'))).toEqual(2020));
+            test(`date object`, () => expect(GraphQLYear.serialize(new Date('Wed Jun 10 2020 09:42:45 GMT+0300'))).toEqual('2020'));
 
-            test(`string`, () => expect(GraphQLYear.serialize('Wed Jun 10 2020 09:42:45 GMT+0300')).toEqual(2020));
+            test(`string`, () => expect(GraphQLYear.serialize('Wed Jun 10 2020 09:42:45 GMT+0300')).toEqual('2020'));
 
-            test(`string UTC format`, () => expect(GraphQLYear.serialize('Wed, 10 Jun 2020 06:54:06 GMT')).toEqual(2020));
+            test(`string UTC format`, () => expect(GraphQLYear.serialize('Wed, 10 Jun 2020 06:54:06 GMT')).toEqual('2020'));
 
         });
 

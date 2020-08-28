@@ -8,11 +8,11 @@ describe(`GraphQLUnsignedByte`, () => {
 
         describe(`valid`, () => {
 
-            test(`int`, () => expect(GraphQLUnsignedByte.serialize(100)).toEqual(100));
+            test(`int`, () => expect(GraphQLUnsignedByte.serialize(100)).toEqual('100'));
 
-            test(`string`, () => expect(GraphQLUnsignedByte.serialize('100')).toEqual(100));
+            test(`string`, () => expect(GraphQLUnsignedByte.serialize('100')).toEqual('100'));
 
-            test(`float`, () => expect(GraphQLUnsignedByte.serialize(100.11)).toEqual(100));
+            test(`float`, () => expect(GraphQLUnsignedByte.serialize(100.11)).toEqual('100'));
 
         });
 
@@ -35,11 +35,11 @@ describe(`GraphQLUnsignedByte`, () => {
 
         describe(`valid`, () => {
 
-            test(`int`, () => expect(GraphQLUnsignedByte.parseValue(100)).toEqual(100));
+            test(`int`, () => expect(GraphQLUnsignedByte.parseValue(100)).toEqual('100'));
 
-            test(`string`, () => expect(GraphQLUnsignedByte.parseValue('100')).toEqual(100));
+            test(`string`, () => expect(GraphQLUnsignedByte.parseValue('100')).toEqual('100'));
 
-            test(`float`, () => expect(GraphQLUnsignedByte.parseValue(100.11)).toEqual(100));
+            test(`float`, () => expect(GraphQLUnsignedByte.parseValue(100.11)).toEqual('100'));
 
         });
 
@@ -65,27 +65,27 @@ describe(`GraphQLUnsignedByte`, () => {
             test(`int`, () => expect(GraphQLUnsignedByte.parseLiteral({
                 kind: Kind.INT,
                 value: 100
-            })).toEqual(100));
+            })).toEqual('100'));
 
             test(`string`, () => expect(GraphQLUnsignedByte.parseLiteral({
                 kind: Kind.STRING,
                 value: 100
-            })).toEqual(100));
+            })).toEqual('100'));
 
             test(`float`, () => expect(GraphQLUnsignedByte.parseLiteral({
                 kind: Kind.STRING,
                 value: '100.12'
-            })).toEqual(100));
+            })).toEqual('100'));
 
             test(`max value`, () => expect(GraphQLUnsignedByte.parseLiteral({
                 kind: Kind.INT,
-                value: 256
-            })).toEqual(256));
+                value: 255
+            })).toEqual('255'));
 
             test(`zero`, () => expect(GraphQLUnsignedByte.parseLiteral({
                 kind: Kind.STRING,
                 value: '0'
-            })).toEqual(0));
+            })).toEqual('0'));
 
         });
 
@@ -108,7 +108,7 @@ describe(`GraphQLUnsignedByte`, () => {
 
             test(`over max value`, () => expect(() => GraphQLUnsignedByte.parseLiteral({
                 kind: Kind.INT,
-                value: 257
+                value: 256
             })).toThrow());
         });
     });
