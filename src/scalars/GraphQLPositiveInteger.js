@@ -1,6 +1,5 @@
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
-import {BigNumber} from "bignumber.js";
-import {parseAsBigNumber, throwConversionError} from "./Utilities";
+import {isInteger, isNegative, parseAsBigNumber, throwConversionError} from "./Utilities";
 
 /**
  * Defines custom GraphQLScalarType for positive Integer values.
@@ -24,15 +23,15 @@ export default new GraphQLScalarType({
             throwConversionError(kind, this.name);
         }
 
-        let value = new BigNumber(node.value);
-        if (!value.isInteger()) {
+        let value = node.value;
+        if (!isInteger(value)) {
             throw new GraphQLError(`Expected '${this.name}' value, but got '${value}'`);
         }
 
-        if (value.isNegative() || value.eq(0)) {
+        if (isNegative(value) || value === 0) {
             throw new GraphQLError(`The value of '${this.name}' should be positive, above zero.`);
         }
 
-        return value;
+        return value + '';
     }
 });

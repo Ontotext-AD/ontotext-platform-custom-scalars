@@ -1,7 +1,6 @@
 import {describe, expect, test} from "@jest/globals";
 import GraphQLUnsignedLong from "../../src/scalars/unsigned/GraphQLUnsignedLong";
 import {Kind} from "graphql";
-import BigNumber from "bignumber.js";
 
 describe(`GraphQLUnsignedLong`, () => {
 
@@ -66,27 +65,27 @@ describe(`GraphQLUnsignedLong`, () => {
             test(`int`, () => expect(GraphQLUnsignedLong.parseLiteral({
                 kind: Kind.INT,
                 value: 100
-            })).toEqual(new BigNumber(100)));
+            })).toEqual('100'));
 
             test(`string`, () => expect(GraphQLUnsignedLong.parseLiteral({
                 kind: Kind.STRING,
                 value: '100'
-            })).toEqual(new BigNumber(100)));
+            })).toEqual('100'));
 
             test(`float`, () => expect(GraphQLUnsignedLong.parseLiteral({
                 kind: Kind.STRING,
                 value: '100.12'
-            })).toEqual(new BigNumber(100)));
+            })).toEqual('100'));
 
             test(`max value`, () => expect(GraphQLUnsignedLong.parseLiteral({
                 kind: Kind.INT,
-                value: 18446744073709552000
-            })).toEqual(new BigNumber(18446744073709552000)));
+                value: '18446744073709551615'
+            })).toEqual('18446744073709551615'));
 
             test(`zero`, () => expect(GraphQLUnsignedLong.parseLiteral({
                 kind: Kind.STRING,
                 value: 0
-            })).toEqual(new BigNumber(0)));
+            })).toEqual('0'));
 
         });
 
@@ -105,6 +104,11 @@ describe(`GraphQLUnsignedLong`, () => {
             test(`negative int`, () => expect(() => GraphQLUnsignedLong.parseLiteral({
                 kind: Kind.INT,
                 value: -10
+            })).toThrow());
+
+            test(`max value edge`, () => expect(() => GraphQLUnsignedLong.parseLiteral({
+                kind: Kind.INT,
+                value: 18446744073709551616
             })).toThrow());
 
             test(`over max value`, () => expect(() => GraphQLUnsignedLong.parseLiteral({

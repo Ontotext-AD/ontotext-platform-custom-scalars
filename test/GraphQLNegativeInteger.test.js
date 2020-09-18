@@ -1,7 +1,6 @@
 import {describe, expect, test} from "@jest/globals";
 import GraphQLNegativeInteger from "../src/scalars/GraphQLNegativeInteger";
 import {Kind} from "graphql";
-import BigNumber from "bignumber.js";
 
 describe(`GraphQLNegativeInteger`, () => {
 
@@ -68,17 +67,17 @@ describe(`GraphQLNegativeInteger`, () => {
             test(`int`, () => expect(GraphQLNegativeInteger.parseLiteral({
                 kind: Kind.STRING,
                 value: '-123'
-            })).toEqual(new BigNumber(-123)));
+            })).toEqual('-123'));
 
             test(`int`, () => expect(GraphQLNegativeInteger.parseLiteral({
                 kind: Kind.INT,
                 value: -123
-            })).toEqual(new BigNumber(-123)));
+            })).toEqual('-123'));
 
             test(`large number`, () => expect(GraphQLNegativeInteger.parseLiteral({
                 kind: Kind.INT,
-                value: -123123123123123123
-            })).toEqual(new BigNumber(-123123123123123123)));
+                value: '-123123123123123123'
+            })).toEqual('-123123123123123123'));
         });
 
         describe(`invalid`, () => {

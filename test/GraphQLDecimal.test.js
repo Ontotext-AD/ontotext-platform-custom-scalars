@@ -1,7 +1,6 @@
 import {describe, expect, test} from "@jest/globals";
 import GraphQLDecimal from "../src/scalars/GraphQLDecimal";
 import {Kind} from "graphql";
-import BigNumber from "bignumber.js";
 
 describe(`GraphQLDecimal`, () => {
 
@@ -45,7 +44,7 @@ describe(`GraphQLDecimal`, () => {
 
             test(`negative string`, () => expect(GraphQLDecimal.parseValue('-100.44')).toEqual('-100.44'));
 
-            test(`large string`, () => expect(GraphQLDecimal.parseValue('10000000000.12600000000')).toEqual('10000000000.126'));
+            test(`large string`, () => expect(GraphQLDecimal.parseValue('10000000000.12600000000')).toEqual('10000000000.12600000000'));
 
             test(`number`, () => expect(GraphQLDecimal.parseValue(100000.999)).toEqual('100000.999'));
 
@@ -75,17 +74,17 @@ describe(`GraphQLDecimal`, () => {
             test(`string`, () => expect(GraphQLDecimal.parseLiteral({
                 kind: Kind.STRING,
                 value: '123123'
-            })).toEqual(BigNumber(123123)));
+            })).toEqual('123123'));
 
             test(`integer`, () => expect(GraphQLDecimal.parseLiteral({
                 kind: Kind.INT,
                 value: 123123
-            })).toEqual(BigNumber(123123)));
+            })).toEqual('123123'));
 
             test(`float`, () => expect(GraphQLDecimal.parseLiteral({
                 kind: Kind.FLOAT,
                 value: 12.3123
-            })).toEqual(BigNumber(12.3123)));
+            })).toEqual('12.3123'));
         });
 
         describe(`invalid`, () => {

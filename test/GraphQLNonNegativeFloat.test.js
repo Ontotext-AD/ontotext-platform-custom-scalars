@@ -11,17 +11,17 @@ describe(`GraphQLNonNegativeFloat`, () => {
             test(`int`, () => expect(GraphQLNonNegativeFloat.parseLiteral({
                 kind: Kind.INT,
                 value: 123
-            })).toEqual(123));
+            })).toEqual('123'));
 
             test(`float`, () => expect(GraphQLNonNegativeFloat.parseLiteral({
                 kind: Kind.FLOAT,
                 value: 123.123
-            })).toEqual(123.123));
+            })).toEqual('123.123'));
 
             test(`zero`, () => expect(GraphQLNonNegativeFloat.parseLiteral({
                 kind: Kind.INT,
                 value: 0
-            })).toEqual(0));
+            })).toEqual('0'));
         });
 
         describe(`invalid`, () => {

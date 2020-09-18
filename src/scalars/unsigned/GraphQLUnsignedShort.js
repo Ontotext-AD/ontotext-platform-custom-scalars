@@ -1,8 +1,8 @@
 import {GraphQLScalarType} from "graphql";
-import {parseAsInt, parseUnsignedLiteral} from "../Utilities";
+import {parseUnsignedValue, parseUnsignedLiteral} from "../Utilities";
 
 // defines max values allowed for the current type
-const MAX_VALUE = Math.pow(2, 16);
+const MAX_VALUE = Math.pow(2, 16) -1;
 
 /**
  * Defines custom GraphQLScalarType for unsigned short values.
@@ -13,11 +13,11 @@ export default new GraphQLScalarType({
     description: `Unsigned 16-bit integer`,
 
     serialize(value) {
-        return parseAsInt(value, this.name);
+        return parseUnsignedValue(value, MAX_VALUE, this.name);
     },
 
     parseValue(value) {
-        return parseAsInt(value, this.name);
+        return parseUnsignedValue(value, MAX_VALUE, this.name);
     },
 
     parseLiteral(node) {

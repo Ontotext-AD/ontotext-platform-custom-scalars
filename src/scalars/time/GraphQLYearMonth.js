@@ -1,36 +1,46 @@
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 import {throwConversionError} from "../Utilities";
 
+const YEAR_MONTH = 'YearMonth';
 const YEAR_MONTH_REGEX = /^-?\d*-(0?[1-9]|1[012])(?:Z|([+-])\d\d:\d\d)?$/;
 
 function validateYearMonth(yearMonth) {
     if (!YEAR_MONTH_REGEX.test(yearMonth)) {
-        throw new GraphQLError(`Invalid value for 'YearMonth' - '${yearMonth}'`);
+        throw new GraphQLError(`Invalid value for '${YEAR_MONTH}' - '${yearMonth}'`);
     }
+}
+
+/**
+ * Builds 'yyyy-mm' format for the passed date. If the month is a single digit, to it will be added leading zero.
+ *
+ * @param date to retrieve the year and the month
+ * @returns {string}
+ */
+function buildOutput(date) {
+    return date.getFullYear() + '-' + date.getMonth().toString().padStart(2, '0');
 }
 
 /**
  * Defines custom GraphQLScalarType for RFC-3339 compliant year month values.
  */
 export default new GraphQLScalarType({
-    name: `YearMonth`,
+    name: YEAR_MONTH,
 
     description: `An RFC-3339 compliant Year Month Scalar`,
 
     serialize(value) {
         if (value instanceof Date) {
-            return value.getFullYear() + '-' + value.getMonth();
+            return buildOutput(value);
         } else if (typeof value === 'string' || value instanceof String) {
             if (!isNaN(Date.parse(value))) {
-                let date = new Date(value);
-                return date.getFullYear() + '-' + date.getMonth();
+                return buildOutput(new Date(value));
             }
 
             validateYearMonth(value);
             return value;
         }
 
-        throw new GraphQLError(`Expected '${this.name}' value, but got '${JSON.stringify(value)}'.`);
+        throw new GraphQLError(`Expected '${YEAR_MONTH}' value, but got '${JSON.stringify(value)}'.`);
     },
 
     parseValue(value) {
@@ -39,12 +49,12 @@ export default new GraphQLScalarType({
             return value;
         }
 
-        throw new GraphQLError(`Expected value in '${this.name}' format, but got '${JSON.stringify(value)}'.`);
+        throw new GraphQLError(`Expected value in '${YEAR_MONTH}' format, but got '${JSON.stringify(value)}'.`);
     },
 
     parseLiteral(node) {
         if (node.kind !== Kind.STRING) {
-            throwConversionError(node.kind, this.name);
+            throwConversionError(node.kind, YEAR_MONTH);
         }
 
         let value = node.value;

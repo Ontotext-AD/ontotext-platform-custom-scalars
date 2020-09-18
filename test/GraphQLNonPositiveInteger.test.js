@@ -1,7 +1,6 @@
 import {describe, expect, test} from "@jest/globals";
 import GraphQLNonPositiveInteger from "../src/scalars/GraphQLNonPositiveInteger";
 import {Kind} from "graphql";
-import BigNumber from "bignumber.js";
 
 describe(`GraphQLNonPositiveInteger`, () => {
 
@@ -66,17 +65,17 @@ describe(`GraphQLNonPositiveInteger`, () => {
             test(`string`, () => expect(GraphQLNonPositiveInteger.parseLiteral({
                 kind: Kind.STRING,
                 value: '-1000'
-            })).toEqual(new BigNumber(-1000)));
+            })).toEqual('-1000'));
 
             test(`int`, () => expect(GraphQLNonPositiveInteger.parseLiteral({
                 kind: Kind.INT,
                 value: -123
-            })).toEqual(new BigNumber(-123)));
+            })).toEqual('-123'));
 
             test(`zero`, () => expect(GraphQLNonPositiveInteger.parseLiteral({
                 kind: Kind.INT,
                 value: 0
-            })).toEqual(new BigNumber(0)));
+            })).toEqual('0'));
         });
 
         describe(`invalid`, () => {
