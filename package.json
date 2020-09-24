@@ -1,5 +1,5 @@
 {
-  "name": "platform-custom-scalars",
+  "name": "ontotext-platform-custom-scalars",
   "version": "0.1.0",
   "description": "A library of customized GraphQL scalars for Ontotext Platform",
   "homepage": "https://github.com/Ontotext-AD/platform-custom-scalars#readme",
