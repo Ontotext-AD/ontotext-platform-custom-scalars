@@ -17,7 +17,7 @@ defined in the Platform could be extended with additional types or properties.
 * NPM ([npm](https://npmjs.org/))
 
 ```
-npm install platform-custom-scalars
+npm install ontotext-platform-custom-scalars
 ```
 
 ## Usage
@@ -25,10 +25,10 @@ To use the scalars after installing the package, you will need to import them in
 resolvers for them.
 ```javascript
 import { ApolloServer, gql } from 'apollo-server';
-import GraphQLDecimal from 'platform-custom-scalars';
+import GraphQLDecimal from 'ontotext-platform-custom-scalars';
 
 // For ES5 projects
-// const { GraphQLDecimal } = require("platform-custom-scalars");
+// const { GraphQLDecimal } = require("ontotext-platform-custom-scalars");
 
 const schema = gql`
   scalar Decimal
