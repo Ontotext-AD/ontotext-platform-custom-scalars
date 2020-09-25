@@ -2,7 +2,7 @@
   "name": "ontotext-platform-custom-scalars",
   "version": "0.1.1",
   "description": "A library of customized GraphQL scalars for Ontotext Platform",
-  "homepage": "https://github.com/Ontotext-AD/platform-custom-scalars#readme",
+  "homepage": "https://github.com/Ontotext-AD/ontotext-platform-custom-scalars#readme",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "src/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ontotext-AD/platform-custom-scalars.git"
+    "url": "git+https://github.com/Ontotext-AD/ontotext-platform-custom-scalars.git"
   },
   "bugs": {
     "url": "https://github.com/Ontotext-AD/platform-custom-scalars/issues"
