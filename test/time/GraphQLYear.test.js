@@ -10,9 +10,13 @@ describe(`GraphQLYear`, () => {
 
             test(`date object`, () => expect(GraphQLYear.serialize(new Date('Wed Jun 10 2020 09:42:45 GMT+0300'))).toEqual('2020'));
 
-            test(`string`, () => expect(GraphQLYear.serialize('Wed Jun 10 2020 09:42:45 GMT+0300')).toEqual('2020'));
+            test(`string`, () => expect(GraphQLYear.serialize('2020')).toEqual('2020'));
+
+            test(`negative string year`, () => expect(GraphQLYear.serialize('-2020')).toEqual('-2020'));
 
             test(`string UTC format`, () => expect(GraphQLYear.serialize('Wed, 10 Jun 2020 06:54:06 GMT')).toEqual('2020'));
+
+            test(`string UTC format with negative year`, () => expect(GraphQLYear.serialize('Wed, 10 Jun -2020 06:54:06 GMT')).toEqual('-2020'));
 
         });
 
@@ -37,6 +41,8 @@ describe(`GraphQLYear`, () => {
 
             test(`string`, () => expect(GraphQLYear.parseValue('2020')).toEqual('2020'));
 
+            test(`negative string`, () => expect(GraphQLYear.parseValue('-2020')).toEqual('-2020'));
+
         });
 
         describe(`invalid`, () => {
@@ -60,6 +66,11 @@ describe(`GraphQLYear`, () => {
                 kind: Kind.STRING,
                 value: '2020'
             })).toEqual('2020'));
+
+            test(`negative string`, () => expect(GraphQLYear.parseLiteral({
+                kind: Kind.STRING,
+                value: '-2020'
+            })).toEqual('-2020'));
 
         });
 

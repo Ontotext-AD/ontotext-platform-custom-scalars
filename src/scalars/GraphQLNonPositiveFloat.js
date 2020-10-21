@@ -1,4 +1,5 @@
 import {GraphQLError, GraphQLFloat, GraphQLScalarType} from "graphql";
+import {normalizeFloatingPointNumbers} from "./Utilities";
 
 const NON_POSITIVE_FLOAT = 'NonPositiveFloat';
 
@@ -7,7 +8,7 @@ function convert(value) {
         throw new GraphQLError(`The value of '${NON_POSITIVE_FLOAT}' should be negative or zero.`);
     }
 
-    return value + '';
+    return normalizeFloatingPointNumbers(value);
 }
 
 /**

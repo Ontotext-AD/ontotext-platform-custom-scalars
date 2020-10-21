@@ -1,5 +1,6 @@
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 import {throwConversionError} from "../Utilities";
+import moment from "moment";
 
 const YEAR = 'Year';
 const YEAR_REGEX = /-?\d{4,}(Z|([+-])\d\d:\d\d)?/;
@@ -10,8 +11,8 @@ function validateYear(year) {
     }
 }
 
-function getYearAsStr(date) {
-    return date.getFullYear().toString();
+function getYearAsStr(year) {
+    return moment([year]).year().toString();
 }
 
 /**
@@ -24,14 +25,15 @@ export default new GraphQLScalarType({
 
     serialize(value) {
         if (value instanceof Date) {
-            return getYearAsStr(value);
+            return getYearAsStr(value.getUTCFullYear().toString());
         } else if (typeof value === 'string' || value instanceof String) {
             if (!isNaN(Date.parse(value))) {
-                return getYearAsStr(new Date(value));
+                // when the date is in ISO format we need to only the year
+                return getYearAsStr(value.match(YEAR_REGEX)[0] || value);
             }
 
             validateYear(value);
-            return value.toString();
+            return getYearAsStr(value.match(YEAR_REGEX)[0] || value);
         }
 
         throw new GraphQLError(`Expected '${YEAR}' value, but got '${JSON.stringify(value)}'.`);

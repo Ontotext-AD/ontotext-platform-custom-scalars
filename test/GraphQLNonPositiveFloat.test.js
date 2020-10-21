@@ -11,7 +11,7 @@ describe(`GraphQLNonPositiveFloat`, () => {
             test(`int`, () => expect(GraphQLNonPositiveFloat.parseLiteral({
                 kind: Kind.INT,
                 value: -123
-            })).toEqual('-123'));
+            })).toEqual('-123.0'));
 
             test(`float`, () => expect(GraphQLNonPositiveFloat.parseLiteral({
                 kind: Kind.FLOAT,
@@ -21,7 +21,7 @@ describe(`GraphQLNonPositiveFloat`, () => {
             test(`zero`, () => expect(GraphQLNonPositiveFloat.parseLiteral({
                 kind: Kind.INT,
                 value: 0
-            })).toEqual('0'));
+            })).toEqual('0.0'));
         });
 
         describe(`invalid`, () => {

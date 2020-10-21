@@ -11,7 +11,7 @@ describe(`GraphQLNegativeFloat`, () => {
             test(`int`, () => expect(GraphQLNegativeFloat.parseLiteral({
                 kind: Kind.INT,
                 value: -123
-            })).toEqual('-123'));
+            })).toEqual('-123.0'));
 
             test(`float`, () => expect(GraphQLNegativeFloat.parseLiteral({
                 kind: Kind.FLOAT,
