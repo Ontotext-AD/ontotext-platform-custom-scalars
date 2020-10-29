@@ -14,6 +14,12 @@ describe(`GraphQLDate`, () => {
 
             test(`string UTC format`, () => expect(GraphQLDate.serialize('Wed, 10 Jun 2020 06:54:06 GMT')).toEqual('2020-06-10'));
 
+            test(`negative year `, () => expect(GraphQLDate.serialize('-2020-06-10')).toEqual('-2020-06-10'));
+
+            test(`Niki's weird date`, () => expect(GraphQLDate.serialize('-20000-04-01')).toEqual('-20000-04-01'));
+
+            test(`Tony's weird date`, () => expect(GraphQLDate.serialize('+159753-07-16')).toEqual('+159753-07-16'));
+
         });
 
         describe(`invalid`, () => {
@@ -35,7 +41,7 @@ describe(`GraphQLDate`, () => {
 
         describe(`valid`, () => {
 
-            test(`string`, () => expect(GraphQLDate.parseValue('2020-06-10')).toEqual(new Date('2020-06-10')));
+            test(`string`, () => expect(GraphQLDate.parseValue('2020-06-10')).toEqual("2020-06-10T00:00:00.000Z"));
 
         });
 
@@ -59,7 +65,7 @@ describe(`GraphQLDate`, () => {
             test(`string`, () => expect(GraphQLDate.parseLiteral({
                 kind: Kind.STRING,
                 value: '2020-06-10'
-            })).toEqual(new Date('2020-06-10')));
+            })).toEqual("2020-06-10T00:00:00.000Z"));
 
         });
 

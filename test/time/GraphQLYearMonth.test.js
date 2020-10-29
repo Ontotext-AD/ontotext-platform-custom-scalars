@@ -8,13 +8,15 @@ describe(`GraphQLYearMonth`, () => {
 
         describe(`valid`, () => {
 
-            test(`date object`, () => expect(GraphQLYearMonth.serialize(new Date('Wed Jun 10 2020 09:42:45 GMT+0300'))).toEqual('2020-05'));
+            test(`date object`, () => expect(GraphQLYearMonth.serialize(new Date('Wed Jun 10 2020 09:42:45 GMT+0300'))).toEqual('2020-06'));
 
-            test(`string`, () => expect(GraphQLYearMonth.serialize('Wed Jun 10 2020 09:42:45 GMT+0300')).toEqual('2020-05'));
+            test(`string`, () => expect(GraphQLYearMonth.serialize('Wed Jun 10 2020 09:42:45 GMT+0300')).toEqual('2020-06'));
 
-            test(`string UTC format`, () => expect(GraphQLYearMonth.serialize('Wed, 10 Jun 2020 06:54:06 GMT')).toEqual('2020-05'));
+            test(`string UTC format`, () => expect(GraphQLYearMonth.serialize('Wed, 10 Jun 2020 06:54:06 GMT')).toEqual('2020-06'));
 
-            test(`month without leading zero`, () => expect(GraphQLYearMonth.serialize('Wed, 10 Nov 2020 06:54:06 GMT')).toEqual('2020-10'));
+            test(`month without leading zero`, () => expect(GraphQLYearMonth.serialize('Tue, 10 Nov 2020 06:54:06 GMT')).toEqual('2020-11'));
+
+            test(`negative year`, () => expect(GraphQLYearMonth.serialize('-0002-08')).toEqual('-0002-08'));
 
         });
 

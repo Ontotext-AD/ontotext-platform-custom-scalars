@@ -65,4 +65,4 @@ Platform provides. If any functionality requires it, the code could be changed t
 [LICENSE](LICENSE)
 
 ## Contributing
-TODO guidelines
+[CONTRIBUTING](CONTRIBUTING.md)

@@ -1,5 +1,6 @@
 import {GraphQLError, GraphQLScalarType, Kind} from "graphql";
 import {throwConversionError} from "../Utilities";
+import moment from "moment";
 
 const YEAR_MONTH = 'YearMonth';
 const YEAR_MONTH_REGEX = /^-?\d*-(0?[1-9]|1[012])(?:Z|([+-])\d\d:\d\d)?$/;
@@ -13,11 +14,12 @@ function validateYearMonth(yearMonth) {
 /**
  * Builds 'yyyy-mm' format for the passed date. If the month is a single digit, to it will be added leading zero.
  *
- * @param date to retrieve the year and the month
+ * @param value to retrieve the year and the month
  * @returns {string}
  */
-function buildOutput(date) {
-    return date.getFullYear() + '-' + date.getMonth().toString().padStart(2, '0');
+function buildOutput(value) {
+    let date = moment(value);
+    return `${date.format("Y")}-${date.format("MM")}`;
 }
 
 /**
@@ -32,12 +34,12 @@ export default new GraphQLScalarType({
         if (value instanceof Date) {
             return buildOutput(value);
         } else if (typeof value === 'string' || value instanceof String) {
-            if (!isNaN(Date.parse(value))) {
-                return buildOutput(new Date(value));
+            if (YEAR_MONTH_REGEX.test(value)) {
+                return value;
             }
-
-            validateYearMonth(value);
-            return value;
+            if (!isNaN(Date.parse(value))) {
+                return buildOutput(value);
+            }
         }
 
         throw new GraphQLError(`Expected '${YEAR_MONTH}' value, but got '${JSON.stringify(value)}'.`);

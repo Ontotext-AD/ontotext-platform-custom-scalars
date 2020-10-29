@@ -1,22 +1,6 @@
 import {GraphQLError, Kind} from "graphql";
 
 /**
- * Parses the input value as int.
- *
- * @param value which should be parsed
- * @param typeName the expected type of the value
- * @returns {string}
- * @throws GraphQLError when the value is not a number
- */
-function parseAsInt(value, typeName) {
-    if (isNumber(value)) {
-        return parseInt(value).toLocaleString('fullwide', {useGrouping:false});
-    }
-
-    throw new GraphQLError(`Expected '${typeName}' value, but got ${_printValueAndType(value)}`);
-}
-
-/**
  * Parses the input value as big number. The passed value will be checked, whether it is a number or not and then
  * directly converted to string, skipping the parsing as it will attempt to round the number, if it exceed the limits
  * of the JS primitives.
@@ -122,6 +106,11 @@ function parseUnsignedValue(value, maxValue, typeName) {
     return parsed.toLocaleString('fullwide', {useGrouping:false});
 }
 
+function normalizeFloatingPointNumbers(value) {
+    let asStr = value + '';
+    return asStr.includes('.') ? asStr : asStr + '.0';
+}
+
 function throwConversionError(actualType, expectedType) {
     throw new GraphQLError(`AST type of '${actualType}' could not be turned into '${expectedType}'`);
 }
@@ -135,7 +124,6 @@ function throwOutOfRangeError(value, typeName) {
 }
 
 export {
-    parseAsInt,
     parseAsBigNumber,
     parseUnsignedLiteral,
     parseUnsignedValue,
@@ -145,5 +133,6 @@ export {
     isNumber,
     throwConversionError,
     throwNegativeValueError,
-    throwOutOfRangeError
+    throwOutOfRangeError,
+    normalizeFloatingPointNumbers
 };
