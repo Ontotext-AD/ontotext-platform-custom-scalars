@@ -7,8 +7,6 @@ on:
   release:
     types:
       - published
-      - !prereleased # exclude prerelease from publishing
-
 
 jobs:
   npm-registry-publish:
