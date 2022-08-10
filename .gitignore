@@ -7,12 +7,14 @@
 /.tmp
 /build
 /dist
+/lib
 
 # dependencies
 /node_modules
 
 # misc
 
+*.tgz
 /coverage/*
 *.log
 
