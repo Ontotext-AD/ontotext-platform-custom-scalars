@@ -60,8 +60,7 @@ function isNumber(value) {
         && typeof value !== 'boolean'
         && value !== null
         && !isNaN(value)
-        && !Number.isNaN(value)
-        && value !== Number.NaN;
+        && !Number.isNaN(value);
 }
 
 function _printValueAndType(value) {

@@ -50,6 +50,7 @@ describe(`GraphQLDecimal`, () => {
 
             test(`negative number`, () => expect(GraphQLDecimal.parseValue(-100000.999)).toEqual('-100000.999'));
 
+            // eslint-disable-next-line no-loss-of-precision
             test(`large number`, () => expect(GraphQLDecimal.parseValue(100000000000.000125)).toEqual('100000000000.00012'));
         });
 
